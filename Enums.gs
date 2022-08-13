@@ -1,2 +1,11 @@
-const TournamentType = { Weekly: 'Weekly', Nonweekly: 'Nonweekly' }
-const GameResult = { Win: 'Win', Loss: 'Loss' }
+const TournamentType = 
+{ 
+  Weekly: 'Weekly', 
+  Nonweekly: 'Nonweekly' 
+}
+
+const GameResult = 
+{ 
+  Win: 'Win', 
+  Loss: 'Loss' 
+}

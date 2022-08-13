@@ -1,21 +1,15 @@
-function execute()//Run this function to perform the check
+function executeHeadToHeadVerif()//Run this function to perform the check
 {
-  const columnStart = 2;
-  const rowStart = 2;
-  const logSeparatorLine = "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_";
-
-  var sheet = SpreadsheetApp.getActiveSpreadsheet();
-  var h2hSheet = SpreadsheetApp.setActiveSheet(sheet.getSheetByName("Head 2 Head"));
-
-  var rowIndex = rowStart;
-  var columnIndex = columnStart;
-  var logStr = "";
-  var incorrectCells = [""];
-  var incorrectCellsStartIndex = 1;//skip first index cuz idk how to fucking declare a null string array in javascript that lets me use array.push()
+  let h2hSheet = SpreadsheetApp.setActiveSheet(SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Head 2 Head"));
+  let rowIndex = h2hDataRowStart;
+  let columnIndex = h2hDataColumnStart;
+  let logStr = "";
+  let incorrectCells = [""];
+  let incorrectCellsStartIndex = 1;
 
   while (h2hSheet.getRange(rowIndex, 1).isBlank() == false)
   {
-    var player1Name = h2hSheet.getRange(rowIndex, 1).getDisplayValue();
+    let player1Name = h2hSheet.getRange(rowIndex, 1).getDisplayValue();
 
     Logger.log(logSeparatorLine);
     Logger.log("CHECKING " + player1Name);
@@ -28,16 +22,16 @@ function execute()//Run this function to perform the check
       }
       else
       {
-        var player2Name = h2hSheet.getRange(1, columnIndex).getDisplayValue();
-        var cell1DataString = h2hSheet.getRange(rowIndex, columnIndex).getDisplayValue();
-        var cell1Wins = cell1DataString.slice(0, 1);
-        var cell1Losses = cell1DataString.slice(2);
+        let player2Name = h2hSheet.getRange(1, columnIndex).getDisplayValue();
+        let cell1DataString = h2hSheet.getRange(rowIndex, columnIndex).getDisplayValue();
+        let cell1Wins = cell1DataString.slice(0, 1);
+        let cell1Losses = cell1DataString.slice(2);
 
         logStr = player1Name + " VS " + player2Name + " (CELL[" + rowIndex + "," + columnToLetter(columnIndex) + "]-" + "[" + cell1Wins + "W " + cell1Losses + "L]) --- ";
 
-        var cell2DataString = h2hSheet.getRange(columnIndex, rowIndex).getDisplayValue();
-        var cell2Wins = cell2DataString.slice(2);
-        var cell2Losses = cell2DataString.slice(0, 1);
+        let cell2DataString = h2hSheet.getRange(columnIndex, rowIndex).getDisplayValue();
+        let cell2Wins = cell2DataString.slice(2);
+        let cell2Losses = cell2DataString.slice(0, 1);
 
         logStr += "(CELL[" + columnIndex + "," + columnToLetter(rowIndex) + "]-[" + cell2Wins + "W " + cell2Losses + "L])";
 
@@ -57,7 +51,7 @@ function execute()//Run this function to perform the check
       columnIndex++;
     }
 
-    columnIndex = columnStart;
+    columnIndex = h2hDataColumnStart;
     rowIndex++;
   }
 
@@ -76,31 +70,4 @@ function execute()//Run this function to perform the check
       Logger.log(incorrectCells[i]);
     }
   }
-  
-}
-
-function letterToColumn(letter)
-{
-  let column = 0, length = letter.length;
-
-  for (let i = 0; i < length; i++)
-  {
-    column += (letter.charCodeAt(i) - 64) * Math.pow(26, length - i - 1);
-  }
-
-  return column;
-}
-
-function columnToLetter(column)
-{
-  let temp, letter = '';
-
-  while (column > 0)
-  {
-    temp = (column - 1) % 26;
-    letter = String.fromCharCode(temp + 65) + letter;
-    column = (column - temp - 1) / 26;
-  }
-
-  return letter;
 }

@@ -1,3 +1,6 @@
+/**
+ * @customfunction
+ */
 function MINREQ(input)
 {
   let minimumAttendanceCount = 6;

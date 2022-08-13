@@ -19,7 +19,6 @@
 */
 
 
-
 var callingCellColumn;
 var callingCellRow;
 var spreadsheet;
@@ -33,6 +32,7 @@ var totalOutOfStateArray;
 var callingCellRangeAsString;
 var currentRowIndex;
 var tournamentTypeBeingCheckedFor;
+
 
 /**
  * @customfunction
@@ -50,7 +50,7 @@ function NOTABLEWL(_callingCellRangeAsString)
   playerBeingChecked = setPlayerBeingChecked();
 
   if (playerBeingChecked == "")
-  {
+  {//Player not found, exit early
     return "";
   }
   
@@ -76,6 +76,7 @@ function NOTABLEWL(_callingCellRangeAsString)
     return totalOutOfStateArray.join(", ");
   }
 }
+
 
 function addToRecordsTotalCellDataArray()
 {
@@ -249,30 +250,6 @@ function setPlayerBeingChecked()
     }
   }
   catch (error){ throw new Error(error); }
-}
-
-function getNextKey(key)//this function isn't my code - https://stackoverflow.com/a/31540111
-{
-  if (key === 'Z' || key === 'z') 
-  {
-    return String.fromCharCode(key.charCodeAt() - 25) + String.fromCharCode(key.charCodeAt() - 25); // AA or aa
-  } 
-  else 
-  {
-    let lastChar = key.slice(-1);
-    let sub = key.slice(0, -1);
-    if (lastChar === 'Z' || lastChar === 'z') 
-    {
-      // If a string of length > 1 ends in Z/z,
-      // increment the string (excluding the last Z/z) recursively,
-      // and append A/a (depending on casing) to it
-      return getNextKey(sub) + String.fromCharCode(lastChar.charCodeAt() - 25);
-    } 
-    else 
-    {//(take till last char) append with (increment last char)
-      return sub + String.fromCharCode(lastChar.charCodeAt() + 1);
-    }
-  }
 }
 
 function getRowOfPlayerNameOnRecordsSheet(playerBeingSearchedFor)
