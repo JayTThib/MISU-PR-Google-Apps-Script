@@ -15,7 +15,8 @@
 
 /* [TODO]
  * CHECK IF PLAYER NAMES ARE CASE SENSITIVE
- * 
+ * In the future, assign each player an ID instead of just using their name.
+ * Not sure if each spreadsheet player should just have their own page, or if I can neatly organize/store all their info (start.gg user IDs, tags, etc)
 */
 
 
