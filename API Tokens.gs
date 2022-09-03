@@ -1,1 +1,1 @@
-const startGGtoken = '';
+const startGGtoken = '123';
